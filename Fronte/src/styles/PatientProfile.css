@@ -1,0 +1,27 @@
+.profile-card {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 25px;
+}
+
+/* header */
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 110px;
+  margin-bottom: 10px;
+}
+
+/* body */
+
+.profile-body p {
+  margin-bottom: 8px;
+  font-size: 15px;
+}

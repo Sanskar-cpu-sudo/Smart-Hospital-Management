@@ -1,0 +1,76 @@
+/* ================= GRID ================= */
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+/* responsive */
+
+@media (max-width: 1200px) {
+  .doctor-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .doctor-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .doctor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+/* ================= CARD ================= */
+
+.doctor-card {
+  background: #f8f9fb;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.doctor-img {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.spec {
+  color: #0d6efd;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.clinic {
+  font-size: 14px;
+}
+
+.location {
+  font-size: 12px;
+  color: gray;
+}
+
+/* ================= SEARCH ================= */
+
+.search-wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.search-input {
+  border-radius: 25px;
+  padding: 10px 18px;
+}
