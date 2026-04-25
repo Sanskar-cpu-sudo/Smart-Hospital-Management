@@ -25,9 +25,7 @@ function PatientHome() {
   return (
     <div className="container py-4">
 
-      {/* ================================================= */}
       {/* ================= HERO 1 ======================== */}
-      {/* ================================================= */}
 
       <section className="hero-section mb-5">
         <div className="row align-items-center">
@@ -41,7 +39,7 @@ function PatientHome() {
 
             <button
               className="btn btn-light"
-              onClick={() => navigate("/doctors")}
+              onClick={() => navigate("/showalldoctors")}
             >
               Book Appointment →
             </button>
@@ -54,11 +52,7 @@ function PatientHome() {
         </div>
       </section>
 
-
-
-      {/* ================================================= */}
       {/* ================= TOP DOCTORS =================== */}
-      {/* ================================================= */}
 
       <h3 className="text-center fw-bold mb-4">Top Doctors</h3>
 
@@ -105,11 +99,7 @@ function PatientHome() {
         </div>
       )}
 
-
-
-      {/* ================================================= */}
       {/* ================= SPECIALIZATION ================ */}
-      {/* ================================================= */}
 
       <h3 className="text-center fw-bold mb-4">
         Browse by Specialization
@@ -139,11 +129,7 @@ function PatientHome() {
 
       </div>
 
-
-
-      {/* ================================================= */}
       {/* ================= HERO 2 ======================== */}
-      {/* ================================================= */}
 
       <section className="hero-section mb-5">
         <div className="row align-items-center">
@@ -167,11 +153,7 @@ function PatientHome() {
         </div>
       </section>
 
-
-
-      {/* ================================================= */}
       {/* ================= FOOTER ======================== */}
-      {/* ================================================= */}
 
       <footer className="footer mt-5">
 
@@ -208,7 +190,7 @@ function PatientHome() {
         <hr />
 
         <p className="text-center small">
-          Copyright 2024 © Prescripto.com - All Rights Reserved
+          Copyright 2026  Prescripto.com - All Rights Reserved
         </p>
 
       </footer>

@@ -14,7 +14,6 @@ function authMiddleware(req, res, next) {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-    // ✅ Store full payload
     req.user = decoded; // { userId, role }
 
     next();

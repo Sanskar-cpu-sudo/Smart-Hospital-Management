@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../styles/Signup.css";
 
 const UserSignup = () => {
   const navigate = useNavigate();
@@ -22,17 +23,19 @@ const UserSignup = () => {
     days: []
   });
 
-  /* ---------- COMMON ---------- */
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   const handleExtraChange = (e) => {
-    setExtra({ ...extra, [e.target.name]: e.target.value });
+    setExtra({
+      ...extra,
+      [e.target.name]: e.target.value
+    });
   };
-
-  /* ---------- DAYS ---------- */
 
   const toggleDay = (day) => {
     setAvailability((prev) => ({
@@ -43,8 +46,6 @@ const UserSignup = () => {
     }));
   };
 
-  /* ---------- SUBMIT ---------- */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -53,114 +54,302 @@ const UserSignup = () => {
       role,
       extradata:
         role === "doctor"
-          ? { ...extra, availability: [availability] }
+          ? {
+              ...extra,
+              availability: [availability]
+            }
           : extra
     };
 
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", payload);
+      await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        payload
+      );
+
       alert("Signup Successful");
       navigate("/login");
+
     } catch (err) {
-      alert(err.response?.data?.message || "Error");
+      alert(
+        err.response?.data?.message ||
+          "Error"
+      );
     }
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="signup-page">
+      <div className="signup-card">
 
-      <form onSubmit={handleSubmit}>
+        <div className="auth-logo">
+          🏥
+        </div>
 
-        <input name="username" placeholder="Username" onChange={handleChange} />
-        <br />
+        <h2>Create Account</h2>
 
-        <input name="email" placeholder="Email" onChange={handleChange} />
-        <br />
+        <p>
+          Join MediCare today
+        </p>
 
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-        <br />
+        <form onSubmit={handleSubmit}>
 
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="">Select Role</option>
-          <option value="doctor">Doctor</option>
-          <option value="patient">Patient</option>
-        </select>
+          {/* common */}
+          <div className="input-group-custom">
+            <label>Username</label>
+            <input
+              name="username"
+              placeholder="Enter username"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <br /><br />
+          <div className="input-group-custom">
+            <label>Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {role === "patient" && (
-          <>
-            <input name="age" placeholder="Age" onChange={handleExtraChange} />
-            <br />
-            <input name="mobile" placeholder="Mobile" onChange={handleExtraChange} />
-            <br></br>
-            <select name="gender" onChange={handleExtraChange}>
-                <option value="">Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <input name="address" placeholder="Address" onChange={handleExtraChange} />
-            <br />
-            <input name="bloodGroup" placeholder="bg" onChange={handleExtraChange} />
-            <br />
-          </>
-        )}
+          <div className="input-group-custom">
+            <label>Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter password"
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {role === "doctor" && (
-          <>
-            <input name="Bio" placeholder="Bio" onChange={handleExtraChange} />
-            <br />
-            <input name="specialization" placeholder="Specialization" onChange={handleExtraChange} />
-            <br />
-                <h3>Clinic Details</h3>
+          {/* role */}
+          <label className="role-label">
+            Select Role
+          </label>
 
+          <div className="role-selector">
+            <button
+              type="button"
+              className={
+                role === "patient"
+                  ? "role-btn active"
+                  : "role-btn"
+              }
+              onClick={() =>
+                setRole("patient")
+              }
+            >
+              Patient
+            </button>
+
+            <button
+              type="button"
+              className={
+                role === "doctor"
+                  ? "role-btn active"
+                  : "role-btn"
+              }
+              onClick={() =>
+                setRole("doctor")
+              }
+            >
+              Doctor
+            </button>
+          </div>
+
+          {/* patient */}
+          {role === "patient" && (
+            <>
+              <div className="input-group-custom">
+                <input
+                  name="age"
+                  placeholder="Age"
+                  onChange={handleExtraChange}
+                />
+              </div>
+
+              <div className="input-group-custom">
+                <input
+                  name="mobile"
+                  placeholder="Mobile"
+                  onChange={handleExtraChange}
+                />
+              </div>
+
+              <div className="input-group-custom">
+                <select
+                  name="gender"
+                  onChange={handleExtraChange}
+                >
+                  <option value="">
+                    Select Gender
+                  </option>
+                  <option value="male">
+                    Male
+                  </option>
+                  <option value="female">
+                    Female
+                  </option>
+                  <option value="other">
+                    Other
+                  </option>
+                </select>
+              </div>
+
+              <div className="input-group-custom">
+                <input
+                  name="address"
+                  placeholder="Address"
+                  onChange={handleExtraChange}
+                />
+              </div>
+
+              <div className="input-group-custom">
+                <input
+                  name="bloodGroup"
+                  placeholder="Blood Group"
+                  onChange={handleExtraChange}
+                />
+              </div>
+            </>
+          )}
+
+          {/* doctor */}
+          {role === "doctor" && (
+            <>
+              <div className="input-group-custom">
+                <input
+                  name="Bio"
+                  placeholder="Bio"
+                  onChange={handleExtraChange}
+                />
+              </div>
+
+              <div className="input-group-custom">
+                <input
+                  name="specialization"
+                  placeholder="Specialization"
+                  onChange={handleExtraChange}
+                />
+              </div>
+
+              <div className="input-group-custom">
                 <input
                   name="clinicName"
                   placeholder="Clinic Name"
                   onChange={handleExtraChange}
                 />
-                <br />
+              </div>
 
+              <div className="input-group-custom">
                 <input
                   name="clinicAddress"
                   placeholder="Clinic Address"
                   onChange={handleExtraChange}
                 />
-                <br />
+              </div>
 
+              <div className="input-group-custom">
                 <input
                   name="clinicLocation"
                   placeholder="City / Location"
                   onChange={handleExtraChange}
                 />
-                <br />
-                        <input
-              name="clinicSpecialization"
-              placeholder="Clinic Specialization"
-              onChange={handleExtraChange}
-            />
-            <br /><br />
-            <input type="time" onChange={(e) => setAvailability({ ...availability, from: e.target.value })} />
-            <input type="time" onChange={(e) => setAvailability({ ...availability, to: e.target.value })} />
-            <input type="number" placeholder="Slots" onChange={(e) => setAvailability({ ...availability, maxSlots: e.target.value })} />
+              </div>
 
-            <br /><br />
+              <div className="input-group-custom">
+                <input
+                  name="clinicSpecialization"
+                  placeholder="Clinic Specialization"
+                  onChange={handleExtraChange}
+                />
+              </div>
 
-            {["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].map(day => (
-              <label key={day}>
-                <input type="checkbox" onChange={() => toggleDay(day)} />
-                {day}
-              </label>
-            ))}
-          </>
-        )}
+              <div className="availability-row">
+                <input
+                  type="time"
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      from: e.target.value
+                    })
+                  }
+                />
 
-        <br /><br />
+                <input
+                  type="time"
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      to: e.target.value
+                    })
+                  }
+                />
 
-        <button type="submit">Signup</button>
-      </form>
+                <input
+                  type="number"
+                  placeholder="Slots"
+                  onChange={(e) =>
+                    setAvailability({
+                      ...availability,
+                      maxSlots: e.target.value
+                    })
+                  }
+                />
+              </div>
+
+              <div className="days-box">
+                {[
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat",
+                  "Sun"
+                ].map((day) => (
+                  <button
+                    key={day}
+                    type="button"
+                    className={
+                      availability.days.includes(day)
+                        ? "day-btn active"
+                        : "day-btn"
+                    }
+                    onClick={() =>
+                      toggleDay(day)
+                    }
+                  >
+                    {day}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          <button
+            className="auth-btn"
+            type="submit"
+            disabled={!role}
+          >
+            Signup
+          </button>
+
+        </form>
+
+        <div className="auth-footer">
+          Already have an account?{" "}
+          <Link to="/login">
+            Login
+          </Link>
+        </div>
+
+      </div>
     </div>
   );
 };

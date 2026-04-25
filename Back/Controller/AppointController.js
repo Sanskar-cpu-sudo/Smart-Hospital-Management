@@ -28,7 +28,6 @@ async function booking(req, res) {
 
     const clinicId = doctor.clinicId;
 
-    /* ⭐ FIXED HERE */
     const day = new Date(date).toLocaleDateString("en-US", {
       weekday: "short"
     });
@@ -94,7 +93,7 @@ async function showAppoint(req, res) {
       doctorId: doctor._id,
       date: today,
     })
-      .populate("patientId", "name")
+      .populate("patientId", "username email")
       .sort({ time: 1 });
 
     // auto-complete logic

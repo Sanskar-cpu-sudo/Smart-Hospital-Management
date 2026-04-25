@@ -59,10 +59,10 @@ const UserProfile = () => {
         <div className="profile-header">
 
           <img
-            src="https://cdn-icons-png.flaticon.com/512/387/387561.png"
-            alt="user"
-            className="profile-img"
-          />
+  src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+  alt="patient"
+  className="profile-img"
+/>
 
           {/* ✅ populated userId */}
           <h3>{profile.userId?.username}</h3>

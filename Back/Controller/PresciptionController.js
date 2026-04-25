@@ -58,18 +58,26 @@ async function writePrescription(req,res){
   }
 }
 
-async function  getMyPrescriptions  (req, res) {
+async function getMyPrescriptions(req, res) {
   try {
     const { userId, role } = req.user;
 
     if (role !== "patient") {
-      return res.status(403).json({ message: "Access denied" });
+      return res.status(403).json({
+        message: "Access denied"
+      });
     }
 
     const prescriptions = await Prescription.find({
       patientId: userId
     })
-      .populate("doctorId")
+      .populate({
+        path: "doctorId",
+        populate: {
+          path: "userId",
+          select: "username email"
+        }
+      })
       .populate("appointmentId")
       .sort({ createdAt: -1 });
 
@@ -79,8 +87,7 @@ async function  getMyPrescriptions  (req, res) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
-};
-
+}
 module.exports={
   writePrescription,
   getMyPrescriptions,

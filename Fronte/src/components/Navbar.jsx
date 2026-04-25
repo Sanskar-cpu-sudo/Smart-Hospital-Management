@@ -4,22 +4,31 @@ import "../styles/Navbar.css";
 function Navbar() {
   const navigate = useNavigate();
 
-  const role = localStorage.getItem("role"); // patient | doctor | null
+  const role = localStorage.getItem("role");
+  const userId = localStorage.getItem("userId");
 
   const logout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+  const getHomeRoute = () => {
+    if (role === "patient") return "/patient/dashboard";
+    if (role === "doctor") return "/doctor/dashboard";
+    return "/";
+  };
 
-      {/* ================= LOGO ================= */}
-      <Link className="navbar-brand fw-bold text-primary" to="/">
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark px-4 py-3">
+
+      {/* LOGO */}
+      <Link
+        className="navbar-brand fw-bold fs-4"
+        to={getHomeRoute()}
+      >
         🏥 MediCare
       </Link>
 
-      {/* mobile toggle */}
       <button
         className="navbar-toggler"
         type="button"
@@ -29,68 +38,86 @@ function Navbar() {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="nav">
-
+      <div
+        className="collapse navbar-collapse"
+        id="nav"
+      >
         <ul className="navbar-nav ms-auto align-items-center gap-3">
 
-          {/* ================================================= */}
-          {/* ================= GUEST ========================= */}
-          {/* ================================================= */}
-
+          {/* guest */}
           {!role && (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/doctors">All Doctors</Link>
+                <Link
+                  className="nav-link"
+                  to="/showalldoctors"
+                >
+                  Doctors
+                </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/about">About Us</Link>
+                <Link
+                  className="nav-link"
+                  to="/login"
+                >
+                  Login
+                </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
-              </li>
-
-              <li className="nav-item">
-                <Link className="btn btn-primary btn-sm" to="/signup">
+                <Link
+                  className="btn btn-primary rounded-pill px-4"
+                  to="/signup"
+                >
                   Signup
                 </Link>
               </li>
             </>
           )}
 
-
-          {/* ================================================= */}
-          {/* ================= PATIENT ======================= */}
-          {/* ================================================= */}
-
+          {/* patient */}
           {role === "patient" && (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/showalldoctors">All Doctors</Link>
-              </li>
-
-              <li className="nav-item">
-                <Link className="nav-link" to="/patient/appointments">
-                  My Appointments
+                <Link
+                  className="nav-link"
+                  to="/showalldoctors"
+                >
+                  Doctors
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/patient/prescriptions">
-                  My Prescriptions
+                <Link
+                  className="nav-link"
+                  to="/patient/appointments"
+                >
+                  Appointments
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link"  to={`/profile/${localStorage.getItem("userId")}/${localStorage.getItem("role")}`}>
-                  My Profile
+                <Link
+                  className="nav-link"
+                  to="/patient/prescriptions"
+                >
+                  Prescriptions
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  to={`/profile/${userId}/patient`}
+                >
+                  Profile
                 </Link>
               </li>
 
               <li className="nav-item">
                 <button
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-danger rounded-pill px-4"
                   onClick={logout}
                 >
                   Logout
@@ -99,26 +126,30 @@ function Navbar() {
             </>
           )}
 
-
-          {/* ================================================= */}
-          {/* ================= DOCTOR ======================== */}
-          {/* ================================================= */}
-
+          {/* doctor */}
           {role === "doctor" && (
             <>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">About Us</Link>
+                <Link
+                  className="nav-link"
+                  to="/doctor/dashboard"
+                >
+                  Dashboard
+                </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/doctor/profile">
-                  My Profile
+                <Link
+                  className="nav-link"
+                  to={`/profile/${userId}/doctor`}
+                >
+                  Profile
                 </Link>
               </li>
 
               <li className="nav-item">
                 <button
-                  className="btn btn-danger btn-sm"
+                  className="btn btn-danger rounded-pill px-4"
                   onClick={logout}
                 >
                   Logout
@@ -129,6 +160,7 @@ function Navbar() {
 
         </ul>
       </div>
+
     </nav>
   );
 }

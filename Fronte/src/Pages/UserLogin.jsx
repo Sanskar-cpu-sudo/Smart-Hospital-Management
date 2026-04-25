@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../styles/Login.css";
 
 function UserLogin() {
   const navigate = useNavigate();
@@ -11,9 +12,12 @@ function UserLogin() {
   });
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
   };
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,13 +45,61 @@ function UserLogin() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <br />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    <div className="auth-page">
+      <div className="auth-card">
+
+        <div className="auth-logo">
+          🏥
+        </div>
+
+        <h2>Welcome Back</h2>
+
+        <p>
+          Login to your MediCare account
+        </p>
+
+        <form onSubmit={handleSubmit}>
+
+          <div className="input-group-custom">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="input-group-custom">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            className="auth-btn"
+            type="submit"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <div className="auth-footer">
+          Don’t have an account?{" "}
+          <Link to="/signup">
+            Signup
+          </Link>
+        </div>
+
+      </div>
+    </div>
   );
 }
 

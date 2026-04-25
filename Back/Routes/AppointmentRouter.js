@@ -8,7 +8,7 @@ const Appointment=require("../Controller/AppointController")
 router.post("/book", auth, Appointment.booking);
 router.get("/count", Appointment.countAppointments);
 router.get("/show",auth,Appointment.getPatientAppointments)
-router.get("/doctor/:userId/:role", Appointment.showAppoint);
+router.get("/doctor",auth, Appointment.showAppoint);
 router.delete("/cancel/:appointmentId", auth, Appointment.cancel);
 
 module.exports=router;

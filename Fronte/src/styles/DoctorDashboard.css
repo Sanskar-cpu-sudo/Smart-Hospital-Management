@@ -1,0 +1,156 @@
+.dashboard-title {
+  font-weight: 700;
+  text-align: center;
+  color: #223;
+}
+
+/* Stats */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+  font-size: 32px;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.stat-card p {
+  margin: 0;
+  color: gray;
+  font-weight: 500;
+}
+
+.confirmed-card h3 {
+  color: #198754;
+}
+
+.cancelled-card h3 {
+  color: #dc3545;
+}
+
+.completed-card h3 {
+  color: #6c757d;
+}
+
+/* Empty */
+
+.empty-box {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+/* Appointment cards */
+
+.appointment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.appointment-card {
+  background: #f8f9fb;
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.patient-img {
+  width: 90px;
+  margin-bottom: 12px;
+}
+
+.email {
+  font-size: 14px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.badge-confirmed,
+.badge-cancelled,
+.badge-completed {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 30px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.badge-confirmed {
+  background: #198754;
+}
+
+.badge-cancelled {
+  background: #dc3545;
+}
+
+.badge-completed {
+  background: #6c757d;
+}
+
+.prescription-btn {
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  padding: 11px;
+  background: #4f6df5;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.prescription-btn:hover {
+  background: #3554e2;
+}
+
+.done-text {
+  color: #198754;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Responsive */
+
+@media (max-width: 992px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .appointment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-grid,
+  .appointment-grid {
+    grid-template-columns: 1fr;
+  }
+}
